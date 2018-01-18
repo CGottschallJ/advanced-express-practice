@@ -9,10 +9,17 @@ export function list(request, response) {
 }
 
 export function show(request, response) {
-  let id = request.params.id;
-  return response.json(contacts.find(contact => contact._id == id));
+  ContactModel.findById(request.params.id).exec()
+  .then(contact => {
+    response.json(contact);
+  });
 }
 
 export function create(request, response) {
-  return response.json(contacts.push(request.body));
+  const contact = new ContactModel(request.body);
+  contact.save()
+  .then(contact => {
+    return response.json(contact);
+  });
+
 }

@@ -9,10 +9,16 @@ export function list(request, response) {
 }
 
 export function show(request, response) {
-  let id = request.params.id;
-  return response.json(vehicles.find(vehicle => vehicle._id == id));
+  VehicleModel.findById(request.params.id).exec()
+  .then(vehicle => {
+    response.json(vehicle);
+  });
 }
 
 export function create(request, response) {
-  return response.json(vehicles.push(request.body));
+  const vehicle = new VehicleModel(request.body);
+  vehicle.save()
+  .then(vehicle => {
+    response.json(vehicle);
+  });
 }

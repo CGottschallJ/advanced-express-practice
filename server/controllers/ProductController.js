@@ -9,10 +9,16 @@ export function list(request, response) {
 }
 
 export function show(request, response) {
-  let id = request.params.id;
-  return response.json(products.find(product => product._id == id));
+  ProductModel.findById(request.params.id).exec()
+  .then(product => {
+    response.json(product);
+  });
 }
 
 export function create(request, response) {
-  return response.json(products.push(request.body));
+  const product = new ProductModel(request.body);
+  product.save()
+  .then(product => {
+    response.json(product);
+  });
 }

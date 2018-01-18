@@ -9,10 +9,16 @@ export function list(request, response) {
 }
 
 export function show(request, response) {
-  let id= request.params.id;
-  return response.json(comments.find(comment => comment._id == id));
+  CommentModel.findById(request.params.id).exec()
+  .then(comment => {
+    response.json(comment);
+  });
 }
 
 export function create(request, response) {
-  return response.json(comments.push(request.body));
+  const comment = new CommentModel(request.body);
+  comment.save()
+  .then(comment => {
+    response.json(comment);
+  });
 }
