@@ -1,7 +1,11 @@
 import contacts from '../contacts';
+import ContactModel from "../models/ContactModel";
 
 export function list(request, response) {
-  return response.json(contacts);
+  ContactModel.find({}).exec()
+  .then(contacts => {
+    return response.json(contacts);
+  });
 }
 
 export function show(request, response) {

@@ -1,7 +1,11 @@
 import products from '../products';
+import ProductModel from "../models/ProductModel"
 
 export function list(request, response) {
-  return response.json(products);
+  ProductModel.find({}).exec()
+  .then(products => {
+      return response.json(products);
+  });
 }
 
 export function show(request, response) {

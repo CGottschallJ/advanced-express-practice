@@ -8,6 +8,10 @@ import commentRoutes from "./routes/CommentRoutes.js";
 import contactRoutes from "./routes/ContactRoutes.js";
 import productRoutes from "./routes/ProductRoutes.js";
 import vehicleRoutes from "./routes/VehicleRoutes.js";
+import mongoose from "mongoose";
+
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost/advanced-express-practice");
 
 const app = express();
 app.use(bodyParser.json());

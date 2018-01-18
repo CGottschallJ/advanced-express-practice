@@ -1,7 +1,11 @@
 import vehicles from '../vehicles';
+import VehicleModel from '../models/VehicleModel';
 
 export function list(request, response) {
-  return response.json(vehicles);
+  VehicleModel.find({}).exec()
+  .then(vehicles => {
+    return response.json(vehicles);
+  });
 }
 
 export function show(request, response) {

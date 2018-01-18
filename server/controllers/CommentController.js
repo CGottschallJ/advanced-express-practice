@@ -1,7 +1,11 @@
 import comments from '../comments';
+import CommentModel from "../models/CommentModel";
 
 export function list(request, response) {
-  return response.json(comments);
+  CommentModel.find({}).exec()
+  .then(comments => {
+    return response.json(comments);
+  });
 }
 
 export function show(request, response) {
